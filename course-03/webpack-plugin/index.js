@@ -70,18 +70,20 @@ module.exports = class DemoPlugin {
       // 获取本次修改的文件
       const changeFilesStr = await getChangeFiles(this.rootPath);
       const changeFilesArr = changeFilesStr.split(/[\s\n]/);
+
       let report = '';
       changeFilesArr.forEach(item => {
+        
         for(let page in pageMap) {
-          
-          if(pageMap[page].includes(path.resolve(this.rootPath, '../../' ,item))) {
+          const filePath = path.resolve(this.rootPath, '../../' ,item).toLowerCase()
+          if(pageMap[page].includes(filePath)) {
             // report+=`修改的文件：${item}, 影响到了页面：${page}\n`;
             report += `修改的文件：${item}, 影响到了页面：${page}, 请QA回归被影响到页面的相关功能\n`
            
           }
         }
       })
-      // console.log(report)
+
       fs.writeFileSync(path.join(this.rootPath, 'report'), report,  (err) => {
         if(err) {
           throw new Error(`write file err, ${err}`);

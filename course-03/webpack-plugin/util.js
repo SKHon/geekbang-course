@@ -38,7 +38,8 @@ const BFSTravelGetAllFiles = (root) => {
   while (queue.length) {
     const curNode = queue.shift();
     const { path = '', deps = [] } = curNode
-    files.push(path);
+    // 由于git获取的diff文件都是小写，所以这里做个处理
+    files.push(path.toLowerCase());
     let len = deps.length;
     let i = 0;
     while(i < len) {
