@@ -1,4 +1,5 @@
 const path = require('path');
+const simpleGit = require('simple-git');
 const _ = require('lodash');
 
 const LEGAL_FILES = ['.js', '.ts', '.jsx', '.tsx', '.css'];
@@ -8,27 +9,7 @@ function checkFile(filePath) {
   return LEGAL_FILES.includes(ext) && !filePath.includes('/node_modules/');
 }
 
-const a = {
-  path: 'aa',
-  dep: [
-    {
-      path: 'bb',
-      dep: [],
-    },
-    {
-      path: 'cc',
-      dep: [
-        {
-          path: 'dd',
-          dep: [],
-        }
-      ],
-    },
-  ]
-}
-
-
-// BFS 遍历对象
+// BFS 遍历对象, 如果匹配到返回该节点
 const BFSTravel = (root, parentPath) => {
   const queue = [root];
 
@@ -50,9 +31,37 @@ const BFSTravel = (root, parentPath) => {
  
 }
 
+const BFSTravelGetAllFiles = (root) => {
+  const files = [];
+  const queue = [root];
+
+  while (queue.length) {
+    const curNode = queue.shift();
+    const { path = '', deps = [] } = curNode
+    files.push(path);
+    let len = deps.length;
+    let i = 0;
+    while(i < len) {
+      queue.push(deps[i]);
+      i++;
+    }
+  }
+  return files;
+}
+
+// 获取当前修改的文件列表
+const getChangeFiles = async (root) => {
+  const git = simpleGit();
+  const changeFiles = await git.diff(['--name-only', root]);
+  return changeFiles;
+}
+
+
 
 
 exports.default = {
   checkFile,
-  BFSTravel
+  BFSTravel,
+  BFSTravelGetAllFiles,
+  getChangeFiles
 }
