@@ -1,4 +1,4 @@
-import Common from './common';
+import Common from './Common';
 export default function Page01() {
   return <div> 
     <Common />

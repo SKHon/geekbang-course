@@ -1,3 +1,4 @@
+const path = require('path');
 const DepAnalysisPlugin = require('../webpack-plugin/index');
 module.exports = function override(config, env) {
  
@@ -6,7 +7,7 @@ module.exports = function override(config, env) {
   config.cache = false;
   config.plugins.push(
     new DepAnalysisPlugin({
-      dirPath: __dirname
+      rootPath: __dirname
     })
   );
   
