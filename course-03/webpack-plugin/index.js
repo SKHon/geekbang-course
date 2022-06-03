@@ -20,12 +20,6 @@ module.exports = class DemoPlugin {
           
           // 对于合法文件进行分析
           if(curFile && checkFile(curFile)) {
-            console.log(parentFile);
-            console.log(curFile);
-            // console.log(resourceResolveData);
-            console.log('\n\n');
-            
-
             // 如果有父级文件，则直接添加
             if(parentFile) {
               const curNode = BFSTravel(this.dependenciesTree, parentFile);
@@ -41,14 +35,14 @@ module.exports = class DemoPlugin {
                 deps: []
               }
             }
-            // console.log(JSON.stringify(this.dependenciesTree), '\n');
-            fs.writeFileSync('student-2.json', JSON.stringify(this.dependenciesTree));
           } 
-          // callback()
         }
       )
-
     });
+    // 编译完成之后，操作依赖书
+    compiler.hooks.done.tap("DepAnalysisPlugin", stats => {
+			console.log(this.dependenciesTree);
+		});
    
   } 
 }
