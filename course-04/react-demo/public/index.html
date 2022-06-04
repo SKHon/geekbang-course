@@ -6,7 +6,6 @@
     <!--  这里引入assets-retry  -->
     <script type="text/javascript" src="./assets-retry.umd.js"></script>
     <script type="text/javascript">
-      console.log('==>',window.assetsRetry)
       var succeeded = []
       var failed = []
       var stat = window.assetsRetry({
@@ -19,7 +18,6 @@
               failed.push(url)
           }
       })
-      console.log('==>',stat)
     </script>
     <script src="http://localhost:4001/js/console.js"></script>
     <link rel="stylesheet" href="http://localhost:4001/css/style.css">
