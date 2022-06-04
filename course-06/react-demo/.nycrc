@@ -1,0 +1,15 @@
+{
+    "all": true,
+    "include": [
+        "src/components/**/*.js"
+    ],
+    "exclude": [
+        "src/test/**/*.js"
+    ],
+    "reporter":[
+         "text-summary",
+         "html",
+         "lcovonly"
+    ],
+    "report-dir": ".test_output/coverage"
+}
