@@ -2,6 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <!--  这里引入assets-retry  -->
+    <script type="text/javascript" src="./assets-retry.umd.js"></script>
+    <script type="text/javascript">
+      console.log('==>',window.assetsRetry)
+      var succeeded = []
+      var failed = []
+      var stat = window.assetsRetry({
+          domain: ['localhost:4001', 'localhost:4002'],
+          maxRetryCount: 1,
+          onSuccess: function (url) {
+              succeeded.push(url)
+          },
+          onFail: function (url) {
+              failed.push(url)
+          }
+      })
+      console.log('==>',stat)
+    </script>
+    <script src="http://localhost:4001/js/console.js"></script>
+    <link rel="stylesheet" href="http://localhost:4001/css/style.css">
+    <!---------------------------->
+
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
