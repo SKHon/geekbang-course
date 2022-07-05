@@ -17,7 +17,6 @@ describe('Welcom 组件', () => {
     );
     let tree = component.toJSON();
     
-
     let msg;
     renderer.act(() => {
       msg = tree.props.onClick();

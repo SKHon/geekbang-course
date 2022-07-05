@@ -14,8 +14,6 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "jest --coverage",
-    "test2": "mocha --require @babel/register src/test/*.spec.js",
-    "coverage": "nyc npm run test",
     "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
